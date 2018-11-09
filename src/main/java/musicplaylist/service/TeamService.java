@@ -1,10 +1,8 @@
 package musicplaylist.service;
 
-import musicplaylist.model.Band;
+public interface TeamService {
 
-public interface BandService {
-
-    String[] findBandNames();
+    String[] findTeamNames();
 
     String[] findCollegeNames();
 

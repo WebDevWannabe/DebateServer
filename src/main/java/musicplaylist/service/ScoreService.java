@@ -7,9 +7,13 @@ import org.springframework.stereotype.Service;
 public interface ScoreService {
     Score saveScores(Score score);
 
-    Score findById(String bandName);
+    Score findById(String teamName);
 
-    String findBandName(String bandName);
+    String findTeamName(String teamName);
 
-    void updateScores(double score1, double score2, double score3, double score4, String bandName);
+    Double [] findAveScorePercentages();
+
+    void updateScores(double score1, double score2, double score3, double score4, double scorePercentage1,
+                      double scorePercentage2, double scorePercentage3, double scorePercentage4,
+                      double aveScorePercentage, String teamName);
 }

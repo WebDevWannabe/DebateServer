@@ -22,17 +22,25 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public Score findById(String bandName) {
-        return scoreRepository.findOne(bandName);
+    public Score findById(String teamName) {
+        return scoreRepository.findOne(teamName);
     }
 
     @Override
-    public String findBandName(String bandName) {
-        return scoreRepository.findBandName(bandName);
+    public String findTeamName(String teamName) {
+        return scoreRepository.findTeamName(teamName);
     }
 
     @Override
-    public void updateScores(double score1, double score2, double score3, double score4, String bandName) {
-        scoreRepository.updateScores(score1, score2, score3, score4, bandName);
+    public Double[] findAveScorePercentages() {
+        return scoreRepository.findAveScorePercentages();
+    }
+
+    @Override
+    public void updateScores(double score1, double score2, double score3, double score4, double scorePercentage1,
+                             double scorePercentage2, double scorePercentage3, double scorePercentage4,
+                             double aveScorePercentage, String teamName) {
+        scoreRepository.updateScores(score1, score2, score3, score4, scorePercentage1, scorePercentage2, scorePercentage3,
+                scorePercentage4, aveScorePercentage, teamName);
     }
 }

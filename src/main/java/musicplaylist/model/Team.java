@@ -6,11 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Bands")
-public class Band {
+@Table(name = "Teams")
+public class Team {
     @Id
-    @Column(name = "band_name")
-    private String bandName;
+    @Column(name = "team_name")
+    private String teamName;
 
     @Column(name = "college_name")
     private String collegeName;
@@ -18,21 +18,21 @@ public class Band {
     @Column(name = "college_logo")
     private String collegeLogo;
 
-    public Band() {
+    public Team() {
 
     }
 
-    public Band(String bandName, String collegeName) {
-        this.bandName = bandName;
+    public Team(String teamName, String collegeName) {
+        this.teamName = teamName;
         this.collegeName = collegeName;
     }
 
-    public String getBandName() {
-        return bandName;
+    public String getTeamName() {
+        return teamName;
     }
 
-    public void setBandName(String bandName) {
-        this.bandName = bandName;
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public String getCollegeName() {

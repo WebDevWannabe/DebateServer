@@ -20,27 +20,31 @@ public class ScoreController {
 
     @RequestMapping(path = "/submit", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody String saveScores (@RequestParam String bandName, @RequestParam String collegeName,
-                                            @RequestParam double score1, @RequestParam double score2,
-                                            @RequestParam double score3, @RequestParam double score4) {
+    public @ResponseBody String saveScores (@RequestParam String teamName, @RequestParam String collegeName,
+                                            @RequestParam double score1, @RequestParam double score2, @RequestParam double score3,
+                                            @RequestParam double score4, @RequestParam double scorePercentage1,
+                                            @RequestParam double scorePercentage2, @RequestParam double scorePercentage3,
+                                            @RequestParam double scorePercentage4, @RequestParam double aveScorePercentage) {
 
-        String bandNameExists = scoreService.findBandName(bandName);
-        System.out.println("This is called from saveScores()" + bandNameExists);
+        String teamNameExists = scoreService.findTeamName(teamName);
+        System.out.println("This is called from saveScores()" + teamNameExists);
 
-        if(bandNameExists != null) {
-            System.out.println("band name exists");
-//            Score score = new Score(bandName, collegeName, score1, score2, score3, score4);
+        if(teamNameExists != null) {
+            System.out.println("team name exists");
+//            Score score = new Score(teamName, collegeName, score1, score2, score3, score4);
 
-//            System.out.println(score.getBandName() + ", " + score.getCollegeName() + ", " + + score.getScore1() + ", " +
+//            System.out.println(score.getTeamName() + ", " + score.getCollegeName() + ", " + + score.getScore1() + ", " +
 //                    score.getScore2() + ", " + score.getScore3() + ", " + score.getScore4() + ", " + score.toString());
-            scoreService.updateScores(score1, score2, score3, score4, bandName);
+            scoreService.updateScores(score1, score2, score3, score4, scorePercentage1, scorePercentage2,
+                    scorePercentage3, scorePercentage4, aveScorePercentage, teamName);
 
             System.out.println("Successfully updated");
         } else {
-            System.out.println("band name doesn't exists");
-            Score score = new Score(bandName, collegeName, score1, score2, score3, score4);
+            System.out.println("team name doesn't exists");
+            Score score = new Score(teamName, collegeName, score1, score2, score3, score4, scorePercentage1, scorePercentage2,
+                    scorePercentage3, scorePercentage4, aveScorePercentage);
 
-            System.out.println(score.getBandName() + ", " + score.getCollegeName() + ", " + + score.getScore1() + ", " +
+            System.out.println(score.getTeamName() + ", " + score.getCollegeName() + ", " + + score.getScore1() + ", " +
                     score.getScore2() + ", " + score.getScore3() + ", " + score.getScore4() + ", " + score.toString());
             scoreService.saveScores(score);
 
@@ -50,9 +54,16 @@ public class ScoreController {
         return "Scores saved!";
     }
 
-    @GetMapping(path="/scores/{band_name}")
-    public @ResponseBody Score getScoresByBandName(@PathVariable("band_name") String bandName) {
-        System.out.println("Reading user with id " + bandName + " from db");
-        return scoreService.findById(bandName);
+    @GetMapping(path = "/scores/{team_name}")
+    public @ResponseBody Score getScoresByTeamName(@PathVariable("team_name") String teamName) {
+        System.out.println("Reading user with id " + teamName + " from db");
+        return scoreService.findById(teamName);
+    }
+
+    @RequestMapping(path = "/ave_score_percentages")
+    public @ResponseBody Double[] getAveScorePercentages() {
+        Double[] aveScorePercentages = scoreService.findAveScorePercentages();
+
+        return aveScorePercentages;
     }
 }

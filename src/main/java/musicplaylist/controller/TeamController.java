@@ -1,24 +1,18 @@
 package musicplaylist.controller;
 
-import musicplaylist.model.Band;
-import musicplaylist.model.Score;
-import musicplaylist.service.BandService;
-import musicplaylist.service.ScoreService;
+import musicplaylist.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-public class BandController {
+public class TeamController {
 
-    private BandService bandService;
+    private TeamService teamService;
 
     @Autowired
-    private void setBandService(BandService bandService) {
-        this.bandService = bandService;
+    private void setTeamService(TeamService teamService) {
+        this.teamService = teamService;
     }
 
 //    @RequestMapping(path = "/hello")
@@ -37,28 +31,28 @@ public class BandController {
 //        return "This is the response from the server";
 //    }
 
-    @RequestMapping(path = "/band_names")
-    public @ResponseBody String[] getBandNames() {
-        String[] bandNames = bandService.findBandNames();
-        int lenBandNames = bandNames.length;
+    @RequestMapping(path = "/team_names")
+    public @ResponseBody String[] getTeamNames() {
+        String[] teamNames = teamService.findTeamNames();
+        int lenTeamNames = teamNames.length;
 
         do {
-            System.out.println(lenBandNames + " band names current length");
-            System.out.println(bandNames);
-            lenBandNames -= 1;
-        } while (lenBandNames != 0);
+            System.out.println(lenTeamNames + " team names current length");
+//            System.out.println(teamNames);
+            lenTeamNames -= 1;
+        } while (lenTeamNames != 0);
 
-        return bandNames;
+        return teamNames;
     }
 
     @RequestMapping(path = "/college_names")
     public @ResponseBody String[] getCollegeNames() {
-        String[] collegeNames = bandService.findCollegeNames();
+        String[] collegeNames = teamService.findCollegeNames();
         int lenCollegeNames = collegeNames.length;
 
         do {
             System.out.println(lenCollegeNames + " college names current length");
-            System.out.println(collegeNames);
+//            System.out.println(collegeNames);
             lenCollegeNames -= 1;
         } while (lenCollegeNames != 0);
 
@@ -67,12 +61,12 @@ public class BandController {
 
     @RequestMapping(path = "/college_logos")
     public @ResponseBody String[] getCollegeLogo() {
-        String[] collegeLogo = bandService.findCollegeLogo();
+        String[] collegeLogo = teamService.findCollegeLogo();
         int lenCollegeLogo = collegeLogo.length;
 
         do {
             System.out.println(lenCollegeLogo + " college logo current length");
-            System.out.println(collegeLogo);
+//            System.out.println(collegeLogo);
             lenCollegeLogo -= 1;
         } while (lenCollegeLogo != 0);
 

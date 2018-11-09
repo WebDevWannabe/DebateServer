@@ -11,6 +11,6 @@ public class MusicPlaylistApplication {
 //		System.out.println("Testing from the main");
 //		Score score = new Score();
 //		new ScoreController().saveScores("Fucccccck!", 10, 9.2, 9.8, 9.5);
-//		new BandController().sendResponse();
+//		new TeamController().sendResponse();
 	}
 }
