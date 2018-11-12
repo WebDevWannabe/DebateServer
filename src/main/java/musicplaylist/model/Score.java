@@ -1,12 +1,19 @@
 package musicplaylist.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 
 @Entity
 @Table(name = "Scores")
 public class Score {
-
     @Id
+    @GeneratedValue
+    @Column(name = "input_number")
+    private String inputNumber;
+
+    @Column(name = "judge_number")
+    private int judgeNumber;
+
     @Column(name = "team_name")
     private String teamName;
 
@@ -44,9 +51,10 @@ public class Score {
 
     }
 
-    public Score(String teamName, String collegeName, double score1, double score2, double score3, double score4,
+    public Score(int judgeNumber, String teamName, String collegeName, double score1, double score2, double score3, double score4,
                  double scorePercentage1, double scorePercentage2, double scorePercentage3, double scorePercentage4,
                  double aveScorePercentage) {
+        this.judgeNumber = judgeNumber;
         this.teamName = teamName;
         this.collegeName = collegeName;
         this.score1 = score1;
@@ -63,10 +71,18 @@ public class Score {
     @Override
     public String toString() {
         return String.format(
-                "Score[teamName='%s', collegeName='%s', score1=%.1f, score2=%.1f, score3=%.1f, score4=%.1f, scorePercentage1=%.1f," +
+                "Score[judgeNumber='%d', teamName='%s', collegeName='%s', score1=%.1f, score2=%.1f, score3=%.1f, score4=%.1f, scorePercentage1=%.1f," +
                         "scorePercentage2=%.1f, scorePercentage3=%.1f, scorePercentage4=%.1f, aveScorePercentage=%.1f]",
-                teamName, collegeName, score1, score2, score3, score4, scorePercentage1, scorePercentage2, scorePercentage3,
-                scorePercentage4, aveScorePercentage);
+                judgeNumber, teamName, collegeName, score1, score2, score3, score4, scorePercentage1, scorePercentage2,
+                scorePercentage3, scorePercentage4, aveScorePercentage);
+    }
+
+    public int getJudgeNumber() {
+        return judgeNumber;
+    }
+
+    public void setJudgeNumber(int judgeNumber) {
+        this.judgeNumber = judgeNumber;
     }
 
     public String getTeamName() {

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ScoreServiceImpl implements ScoreService {
 
@@ -22,25 +24,30 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public Score findById(String teamName) {
-        return scoreRepository.findOne(teamName);
+    public Score findScoresOfTeam(String teamName, int judgeNumber) {
+        return scoreRepository.findScoresOfTeam(teamName, judgeNumber);
     }
 
     @Override
-    public String findTeamName(String teamName) {
-        return scoreRepository.findTeamName(teamName);
+    public String findTeamName(String teamName, int judgeNumber) {
+        return scoreRepository.findTeamName(teamName, judgeNumber);
     }
 
     @Override
-    public Double[] findAveScorePercentages() {
-        return scoreRepository.findAveScorePercentages();
+    public List<Double> findAveScorePercentages(int judgeNumber) {
+        return scoreRepository.findAveScorePercentages(judgeNumber);
+    }
+
+    @Override
+    public String[] findTeamNameForAveScorePercentage(int judgeNumber) {
+        return scoreRepository.findTeamNameForAveScorePercentage(judgeNumber);
     }
 
     @Override
     public void updateScores(double score1, double score2, double score3, double score4, double scorePercentage1,
                              double scorePercentage2, double scorePercentage3, double scorePercentage4,
-                             double aveScorePercentage, String teamName) {
+                             double aveScorePercentage, String teamName, int judgeNumber) {
         scoreRepository.updateScores(score1, score2, score3, score4, scorePercentage1, scorePercentage2, scorePercentage3,
-                scorePercentage4, aveScorePercentage, teamName);
+                scorePercentage4, aveScorePercentage, teamName, judgeNumber);
     }
 }
