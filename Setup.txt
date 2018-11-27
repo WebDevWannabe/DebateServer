@@ -1,0 +1,17 @@
+###
+#
+# Date created: 11/27/2018
+#
+###
+
+Setup (When running for the first time only)
+*Note: This setup requires H2 Database to run
+
+1.) Remove or put a comment first '#' in spring.jpa.hibernate.ddl-auto = validate line inside the application properties file to allow the system to create the tables needed. After the application started, terminate it then remove the comment '#' in that line.
+
+2.) Open your h2 database console then goto the Users table, insert some data. (Refer to the image/s named Users_table# in the setup folder)
+
+3.) Now go to the Teams table then populate it with teams data. (Refer to the image/s named Teams_table# in the setup folder)
+
+4.) And last, go to the Utils table and set the system title along with the percentage criterias that will be used. (Refer to the image named Utils_table in the setup folder)
+

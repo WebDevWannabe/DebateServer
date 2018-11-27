@@ -1,5 +1,7 @@
 package musicplaylist.service;
 
+import java.util.List;
+
 public interface UserService {
     String findJudgeNumber(String username, String password);
 
@@ -9,5 +11,9 @@ public interface UserService {
 
     Boolean findBtnFinalSubmitClicked(int judgeNumber);
 
-    void updateBtnSubmitClicked(int judgeNumber);
+    List<Boolean> findAllBtnFinalSubmitClicked();
+
+    void updateBtnSubmitClickedTrue(int judgeNumber);
+
+    void updateBtnSubmitClickedFalse(int judgeNumber);
 }

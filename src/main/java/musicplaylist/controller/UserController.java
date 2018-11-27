@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -70,12 +73,37 @@ public class UserController {
     }
 
     //  For setting the final submit button as true
-    @RequestMapping(path = "/submit_final_score/{judge_number}", method = RequestMethod.POST)
+    @RequestMapping(path = "/submit_final_score/{judge_number}/true", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody String saveFinalScore(@PathVariable("judge_number") int judgeNumber) {
         System.out.println("saveFinalScore method. judgeNumber - " + judgeNumber);
-        userService.updateBtnSubmitClicked(judgeNumber);
+        userService.updateBtnSubmitClickedTrue(judgeNumber);
 
         return "Final Score Saved!";
+    }
+
+    //  For setting the final submit button as false
+    @RequestMapping(path = "/submit_final_score/{judge_number}/false", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public @ResponseBody String updateSubmitButtonClickedFalse(@PathVariable("judge_number") int judgeNumber) {
+        userService.updateBtnSubmitClickedFalse(judgeNumber);
+
+        return "Submit button clicked updated to false";
+    }
+
+    @GetMapping(path = "/all/submit_button_clicked")
+    public @ResponseBody boolean getSubmitButtonClickedValidation() {
+        List<Boolean> allBtnFinalSubmitClicked =  userService.findAllBtnFinalSubmitClicked();
+        boolean isAllBtnFinalSubmitClicked = true;
+
+        for(boolean allBtnFinalSubmitClickedTemp : allBtnFinalSubmitClicked) {
+            if(!allBtnFinalSubmitClickedTemp) {
+                System.out.println("allBtnFinalSubmitClicked -> " + allBtnFinalSubmitClickedTemp);
+                isAllBtnFinalSubmitClicked = false;
+                break;
+            }
+        }
+
+        return isAllBtnFinalSubmitClicked;
     }
 }

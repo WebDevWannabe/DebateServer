@@ -4,6 +4,8 @@ import musicplaylist.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -35,7 +37,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateBtnSubmitClicked(int judgeNumber) {
-        userRepository.updateBtnSubmitClicked(judgeNumber);
+    public List<Boolean> findAllBtnFinalSubmitClicked() {
+        return userRepository.findAllBtnFinalSubmitClicked();
+    }
+
+    @Override
+    public void updateBtnSubmitClickedTrue(int judgeNumber) {
+        userRepository.updateBtnSubmitClickedTrue(judgeNumber);
+    }
+
+    @Override
+    public void updateBtnSubmitClickedFalse(int judgeNumber) {
+        userRepository.updateBtnSubmitClickedFalse(judgeNumber);
     }
 }
